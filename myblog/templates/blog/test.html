@@ -1,0 +1,18 @@
+{% extends "blog/base.html"  %}
+
+
+    {% block x %}
+        <p>{{ name }} - вывел переменную с контекста который передал в rendere функции posts_list</p>
+    {% endblock %}
+
+
+    {% block y %}
+        <h1>Posts:</h1>
+        {% for name_spisok in names %}
+            <h4> {{ name_spisok }} </h4>
+        {% endfor %}
+    {% endblock %}
+
+    {% block z %}
+        title с шаблона который пойдет в title
+    {% endblock %}
