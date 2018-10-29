@@ -29,14 +29,14 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" title="жми ска" href="#">Hidden brand</a>
+                <a class="navbar-brand" title="Home" href="#"></a>
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" title="Мой блог" href="{% url "post_list_url" %}">Posts<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
+                            <a class="nav-link" href="{% url "tag_list_url" %}">Tags</a>
+                        </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#">Disabled</a>
                     </li>
@@ -105,16 +105,16 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="social-networks">
-                            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                            <a href="https://twitter.com/" class="twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.facebook.com/" class="facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="https://plus.google.com/" class="google"><i class="fa fa-google-plus"></i></a>
                         </div>
                         <button type="button" class="btn btn-default">Contact us</button>
                     </div>
                 </div>
             </div>
             <div class="footer-copyright">
-                <p>© 2016 Copyright Text </p>
+                <p>© 2018 Copyright Text </p>
             </div>
         </footer>
 

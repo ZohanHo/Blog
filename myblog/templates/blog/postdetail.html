@@ -1,0 +1,16 @@
+{% extends "blog/base.html" %}
+
+
+    {% block y %}
+            <div class="card" style="margin-bottom: 20px;">
+              <h5 class="card-header">{{ post.date_pub }}</h5>
+              <div class="card-body">
+                <h5 class="card-title"> {{ post.title }} </h5>
+                <p class="card-text"> {{ post.body }} </p>
+              </div>
+            </div>
+    {% endblock %}
+
+    {% block z %}
+            {{ post_detail.title }}
+    {% endblock %}

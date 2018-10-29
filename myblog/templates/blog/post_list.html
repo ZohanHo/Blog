@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+
+{% block x %}
+{% endblock %}
+
+{% block y %}
+    <h3 style="margin-bottom: 20px">Posts:</h3>
+    {% for post in post_query %}
+        {% include "blog/includes/include_card.html" %}
+    {% endfor %}
+{% endblock %}
+
+
+
