@@ -1,0 +1,25 @@
+{% extends "blog/base.html" %}
+
+{% block x %}
+{% endblock %}
+
+{% block y %}
+
+    <form action="{% url "post_create_url" %}" method="post">
+        {% csrf_token %}
+
+        {% for text in form %}
+            {% if text.errors %}
+                <div class="alert alert-danger">
+                    {{ text.errors }}
+                </div>
+            {% endif %}
+            <div class="form-group">
+                {{ text.label }}
+                {{ text }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Post create</button>
+    </form>
+
+{% endblock %}

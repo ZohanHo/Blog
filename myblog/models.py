@@ -18,7 +18,6 @@ class Post(models.Model):
         return reverse("post_detail_url", kwargs={"slug": self.slug})  # в словарь в качестве ключа получает slug,
                                                                        # то поле по которому мы проводим идентификацию обьекта и self.slug
                                                                        # (поле конкретно обьекта )
-
     def __str__(self):
         return self.title
 

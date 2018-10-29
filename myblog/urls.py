@@ -20,6 +20,7 @@ from .views import *
 urlpatterns = [
     path('test/', posts, name = "test"),
     path('post/', posts_list, name = "post_list_url"),
+    path('post/create/', PostCreate.as_view(), name="post_create_url"),
     path('postdetail/<str:slug>/', Post_detail.as_view(), name="post_detail_url"),
     path('tag/', tag_list, name="tag_list_url"),
     path('tag/create/', TagCreate.as_view(), name="tag_create_url"),

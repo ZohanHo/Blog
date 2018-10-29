@@ -13,13 +13,11 @@ class TagForm(forms.ModelForm):
         fields = ["title", "slug"]
 
 
-
     # для того что бы в url который принимает именое значение blog/<slug> не попал create как slug, при переходе на страницу blog/create
     # нам нужно сделать проверку, с помошью метода clean_slug (slug тут потму что проверям slug, стаил такой)
     def clean_slug(self):
 
         new_slug = self.cleaned_data["slug"].lower()
-
 
         if new_slug == "create": # делаем проверку на create в slug
             raise ValidationError("slug не может быть create")
@@ -28,7 +26,21 @@ class TagForm(forms.ModelForm):
         return new_slug
 
 
+class PostForm(forms.ModelForm):
 
+    class Meta:
+        model = Post
+        fields = ["title", "body", "slug" ,"tags_to_post"]
+
+    def clean_post(self):
+
+        new_post = self.cleaned_data["slug"].lower()
+
+        if new_post == "create":
+            raise ValidationError ("Post не может быть create")
+        if Post.objects.filter(slug__iexact=new_post).count():
+            raise ValidationError("Такой slug существует")
+        return new_post
 
 
     # коментируем save, так как у ModelForm есть свой метод save

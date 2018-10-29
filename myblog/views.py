@@ -54,14 +54,28 @@ class Tag_detail(MyMixin, View):
 class TagCreate(View): # тут мы долны принять запрос от пользователя Get и сохранить то что он переда Post, отработать 2 функции
 
     def get(self, request):
-        form = TagForm() # сщздали екземпляр класса
+        form = TagForm() # создали екземпляр класса формы TagForm
         return render(request, "blog/tag_create.html", context={"form":form}) # передаем форму в контекст
 
     def post(self, request):
-        sviazannayaforma = TagForm(request.POST)# создаем екземпляр класса TegForm, куда передаем подсловарь QuerydDict
+        related_form = TagForm(request.POST)# создаем екземпляр класса TegForm, куда передаем подсловарь QuerydDict в конструктор
 
-        if sviazannayaforma.is_valid(): # если форма валидная
-            new_tag = sviazannayaforma.save() # то сохраняем
-            return redirect(new_tag) # и реверсим на ету форму, передав туда наш экземпляр
-        return render(request, "blog/tag_create.html", context={"form": sviazannayaforma})
+        if related_form.is_valid(): # если форма валидная
+            new_tag = related_form.save() # то сохраняем как новый экземпляр класса
+            return redirect(new_tag) # и реверсим на ету форму, передав туда наш сохраненный экземпляр
+        return render(request, "blog/tag_create.html", context={"form": related_form})
         # если форма не валидна то мы должны отобразить форму с теми данными которые он запонил и сообщить об ошибке
+
+class PostCreate(View):
+
+    def get(self, request):
+        form = PostForm()
+        return render(request, "blog/post_create.html", context={"form": form})
+
+    def post(self, request):
+        related_post = PostForm(request.POST)
+
+        if related_post.is_valid():
+            new_post = related_post.save()
+            return redirect(new_post)
+        return render(request, "blog/post_create.html", context={"form" : related_post})
