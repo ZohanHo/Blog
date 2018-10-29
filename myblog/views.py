@@ -79,3 +79,6 @@ class PostCreate(View):
             new_post = related_post.save()
             return redirect(new_post)
         return render(request, "blog/post_create.html", context={"form" : related_post})
+
+
+
