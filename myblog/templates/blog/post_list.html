@@ -3,11 +3,44 @@
 {% block x %}
 {% endblock %}
 
+
+
 {% block y %}
+
+    <div class="container" style="margin-top: 40px">
+        <div class="row">
+            <div class="col md-6 offset md-2">
+                <form action="" method="get">
+                    <!-- actions урл на какой уйдет запрос после того как форма будет засабмичена, метод get по умолчанию, тут можно не указывать -->
+                    <h5  style="color: #0077e2;">Сортировка:</h5><label >
+                        <select class="form-control" name="sort"> <!-- тут указуем имя (name) параметра которое задает поле, наш sort -->
+                            <option value="pk">pk</option>
+                            <!-- тут указуем значение (value) параметра которое задает поле, id, pub_date, title -->
+                            <option value="date_pub">Дата создания</option>
+                            <option value="title">Заголовок</option>
+                            <option value="body">Текст</option>
+                        </select>
+                    </label>
+                    <input type="submit" class="button btn btn-primary form-group" style="vertical-align: inherit;">
+                    <!-- кнопка отправки формы на сервер, после чего будет произведен запрос, в данном случаа GET -->
+                </form>
+                </br>
+            </div>
+        </div>
+    </div>
+
+
+
     <h3 style="margin-bottom: 20px">Posts:</h3>
-    {% for post in post_query %}
+    {% for post in page.object_list %}
         {% include "blog/includes/include_card.html" %}
-    {% endfor %}
+
+    {% endfor %} </br>
+
+    {% include "blog/includes/include_paginations.html" %}
+
+
+
 {% endblock %}
 
 

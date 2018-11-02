@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+
+
+    {% block y %}
+
+        <h3 style="margin-bottom: 20px"> Tag delete:</h3>
+        <form action="{{ tag.get_abs_del_url }}" method="post">
+            {% csrf_token %}
+            <h4>Вы увенеренны чо хотите удалить тег: <b>"{{ tag.pk }}"</b></h4>
+            <a href = "{% url "tag_list_url"  %}"><button type="button" name="button" class="btn btn-primary">Отмена</button></a>
+            <button type="submit" name="button" class="btn btn-danger">Удалить</button>
+        </form>
+
+    {% endblock %}

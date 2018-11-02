@@ -2,10 +2,19 @@
 
 
     {% block y %}
+
         <h4 style="margin-bottom: 20px"> Post with {{ tag.title }} tag:</h4>
+
         {% for post in tag.posts_to_tag.all %} <!-- нужно указать список постов, через tag_detail и адрес обратной связи обращаемся ко всем тегам всязаным с post -->
             {% include "blog/includes/include_card.html" %}
         {% endfor %}
+
+        {% if request.user.is_authenticated and request.user.is_staff %}
+        <div class="">
+            <a href="{{ admin_n.get_abs_update_url }}" class="btn btn-light" style="color: forestgreen">Редактировать</a>
+            <a href="{{ admin_n.get_abs_del_url }}" class="btn btn-light" style="color: firebrick">Удалить</a>
+        </div>
+        {% endif %}
     {% endblock %}
 
 

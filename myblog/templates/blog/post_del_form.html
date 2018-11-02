@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+
+
+    {% block y %}
+
+
+        <h3 style="margin-bottom: 20px"> Tag delete:</h3>
+        <form action="{{ post.get_abs_del_url }}" method="post">{% csrf_token %}
+            <h4>Вы увенеренны чо хотите удалить пост: "{{ object.id }}"?</h4>
+            <a href = "{% url "post_list_url"  %}"><button type="button" name="button" class="btn btn-primary">Отмена</button></a>
+            <input type="submit" value="Удалить" name="button" class="btn btn-danger"></button>
+        </form>
+
+
+    {% endblock %}

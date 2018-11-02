@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from .views import *
 
 urlpatterns = [
+    path('', redirect_blog, name="redirect"),
     path('admin/', admin.site.urls),
     path('blog/', include("myblog.urls")), # функция include принимает строку с адресом урла на который переадрисовуется
 ]

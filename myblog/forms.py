@@ -10,37 +10,46 @@ class TagForm(forms.ModelForm):
 
     class Meta:
         model = Tag
-        fields = ["title", "slug"]
+        fields = ["title"] # , "slug"
 
 
     # для того что бы в url который принимает именое значение blog/<slug> не попал create как slug, при переходе на страницу blog/create
     # нам нужно сделать проверку, с помошью метода clean_slug (slug тут потму что проверям slug, стаил такой)
     def clean_slug(self):
 
-        new_slug = self.cleaned_data["slug"].lower()
+        pk = self.cleaned_data["pk"].lower()
 
-        if new_slug == "create": # делаем проверку на create в slug
+        if pk == "create": # делаем проверку на create в slug
             raise ValidationError("slug не может быть create")
-        if Tag.objects.filter(slug__iexact=new_slug).count():  # делаем проверку что бы поле не дублировалось
-            raise ValidationError("Поле slug -  {} уже существует".format(new_slug))
-        return new_slug
+        if Tag.objects.filter(pk__iexact=pk).count():  # делаем проверку что бы поле не дублировалось
+            raise ValidationError("Поле slug -  {} уже существует".format(pk))
+        return pk
 
 
 class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ["title", "body", "slug" ,"tags_to_post"]
+        fields = ["title", "body", "tags_to_post"] # , "slug"
 
     def clean_post(self):
 
-        new_post = self.cleaned_data["slug"].lower()
+        new_post = self.cleaned_data["pk"].lower()
 
         if new_post == "create":
             raise ValidationError ("Post не может быть create")
-        if Post.objects.filter(slug__iexact=new_post).count():
+        if Post.objects.filter(pk__iexact=new_post).count():
             raise ValidationError("Такой slug существует")
         return new_post
+
+class FormSearch(forms.Form):  # Класс Form - принимает данные из запроса(в виде текстовых строк),валидирует относительно типа полей, приводит к нужному представлению на языке питон
+
+    search = forms.CharField(required=False)  # текстовое поле, required=False - не ртебуется для успешной валидации формы
+    sort = forms.ChoiceField(choices=(("pk", "pk"), ("date_pub", "Дата создания"), ("title", "Заголовок"), ("body", "Текст")), required=False)
+
+
+
+
 
 
     # коментируем save, так как у ModelForm есть свой метод save

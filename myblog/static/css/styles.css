@@ -130,7 +130,33 @@ body{
 }
 
 .navbar {
-
     display: block;
 
 }
+
+.admin-panel{
+    border: 1px solid #212121; /* бардюр */
+    border-radius: 3px; /* закругленные края */
+    position: absolute; /* абсолютное размещение согласно right top ниже */
+    right: 30px;
+    top: 100px;
+    opacity: 0.5; /* полупрозрачность */
+    padding: 5px 0; /* отступ внутри от краев div 5pc сбоку по нулям */
+}
+
+.admin-panel a{
+    display: block; /* + в родительском класе <div class="admin-panel align-items-center" style="">  будет вертикальная панель */
+    margin: 8px; /* отступ внутри между кнопками */
+}
+
+.admin-panel:hover{
+    opacity: 1; /* при наведении полупрозрачность пропадет */
+}
+
+/*a.update{*/
+    /*display: none;*/
+/*}*/
+
+/*a.del{*/
+    /*display: none;*/
+/*}*/

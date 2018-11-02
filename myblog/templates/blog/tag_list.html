@@ -1,8 +1,12 @@
 {% extends "blog/base.html" %}
 
+
+
 {% block y %}
+
+
     <h3>Tegs:</h3>
     {% for tag in tag_query %}
          <a href="{{ tag.get_absolute_url }}"> <p style="margin-top: 10px"> {{ tag.title }}</p></a>
-    {% endfor %}
+    {% endfor %} </br>
 {% endblock %}

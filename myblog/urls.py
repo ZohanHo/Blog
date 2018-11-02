@@ -13,17 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+
 from django.urls import path, include
 from .views import *
 
 urlpatterns = [
     path('test/', posts, name = "test"),
-    path('post/', posts_list, name = "post_list_url"),
-    path('post/create/', PostCreate.as_view(), name="post_create_url"),
-    path('postdetail/<str:slug>/', Post_detail.as_view(), name="post_detail_url"),
-    path('tag/', tag_list, name="tag_list_url"),
+    path('post/',MyListViewPost.as_view() , name = "post_list_url"),   # posts_list
+    path('post/create/', PostCreateView.as_view(), name="post_create_url"),
+    path('post/<pk>/', PostDetailView.as_view(), name="post_detail_url"),
+    path('post/<pk>/update/', PostUpdateViwe.as_view(), name="post_update_url"),
+    path('post/<pk>/delete/', PostDeleteView.as_view(), name="post_del_url"),
+    path('tag/', MyListViewTag.as_view(), name="tag_list_url"), # tag_list
     path('tag/create/', TagCreate.as_view(), name="tag_create_url"),
-    path('tagdetail/<str:slug>/', Tag_detail.as_view(), name="tag_detail_url"),
+    path('tag/<pk>/', TagDetailView.as_view(), name="tag_detail_url"),
+    path('tag/<pk>/update/', TagUpdate.as_view(), name="tag_update_url"),
+    path('tag/<pk>/delete/', TagDelete.as_view(), name="tag_del_url"),
+
 
 ]
