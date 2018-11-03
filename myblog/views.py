@@ -137,7 +137,7 @@ class PostDetailView(DetailView):
     model = Post
     template_name = "blog/postdetail.html"
 
-    # def get(self, request,  pk, **kwargs):
+    # def get(self, request,  pk):
     #     post = self.model.objects.get(pk__iexact=pk)
     #     return render(self.request, self.template_name , context={self.model.__name__.lower(): post, "admin_n": post, 'True': True})
 
@@ -181,6 +181,7 @@ class TagDetailView(DetailView):
     #     return render(self.request, self.template_name , context={self.model.__name__.lower(): tag, "admin_n": tag, 'True': True})
 
 
+
 # class Tag_detail(MyMixin, View):
 #     model = Tag # переопрелилили поле model в класе наследнике, тоесть тут, в базовом класе None
 #     template_name = "blog/tagdetail.html" # переопрелилили поле model в класе наследнике, тоесть тут, в базовом класе None
@@ -210,19 +211,19 @@ class TagUpdate(LoginRequiredMixin,MixUpdate, View):
     template_name = "blog/tag_update_form.html"
     raise_exception = True
 
-    # def get(self, request, pk):
-    #     tag = Tag.objects.get(pk__iexact=pk) # tag ето наш экземпляр который мы вытянули с БД
-    #     related_form = TagForm(instance=tag)  # создали новый екземпляр класа Form и в конструктор передали наш обьект c помощью instance
-    #     return render(request, "blog/tag_update_form.html", context={"form": related_form, "tag": tag})
-    #
-    # def post(self, request, pk):
-    #     tag = Tag.objects.get(pk__iexact=pk) # tag ето наш экземпляр который мы вытянули с БД
-    #     related_form = TagForm(request.POST, instance=tag)  # создали новый екземпляр класа Form и в конструктор передали наш обьект c помощью instance, берем из реквеста
-    #
-    #     if related_form.is_valid():
-    #         update_tag = related_form.save()  # то сохраняем как новый экземпляр класса
-    #         return redirect(update_tag)  # и реверсим на ету форму, передав туда наш сохраненный экземпляр
-    #     return render(request, "blog/tag_update_form.html", context={"form": related_form, "tag": tag})
+    def get(self, request, pk):
+        tag = Tag.objects.get(pk__iexact=pk) # tag ето наш экземпляр который мы вытянули с БД
+        related_form = TagForm(instance=tag)  # создали новый екземпляр класа Form и в конструктор передали наш обьект c помощью instance
+        return render(request, "blog/tag_update_form.html", context={"form": related_form, "tag": tag})
+
+    def post(self, request, pk):
+        tag = Tag.objects.get(pk__iexact=pk) # tag ето наш экземпляр который мы вытянули с БД
+        related_form = TagForm(request.POST, instance=tag)  # создали новый екземпляр класа Form и в конструктор передали наш обьект c помощью instance, берем из реквеста
+
+        if related_form.is_valid():
+            update_tag = related_form.save()  # то сохраняем как новый экземпляр класса
+            return redirect(update_tag)  # и реверсим на ету форму, передав туда наш сохраненный экземпляр
+        return render(request, "blog/tag_update_form.html", context={"form": related_form, "tag": tag})
 
 """создание через 3 строчки"""
 class PostCreateView(CreateView):
@@ -264,20 +265,20 @@ class PostUpdateViwe(UpdateView):
 #     form = PostForm
 #     template_name = "blog/post_update_form.html"
 #     raise_exception = True
-
-    # def get(self, request, pk):
-    #     post = Post.objects.get(pk__iexact=pk) # tag ето наш экземпляр который мы вытянули с БД
-    #     related_form = PostForm(instance=post)  # создали новый екземпляр класа Form и в конструктор передали наш обьект c помощью instance
-    #     return render(request, "blog/post_update_form.html", context={"form": related_form, "post": post})
-    #
-    # def post(self, request, pk):
-    #     post = Post.objects.get(pk__iexact=pk) # tag ето наш экземпляр который мы вытянули с БД
-    #     related_form = PostForm(request.POST, instance=post)  # создали новый екземпляр класа Form и в конструктор передали наш обьект c помощью instance, берем из реквеста
-    #
-    #     if related_form.is_valid():
-    #         update_post = related_form.save()  # то сохраняем как новый экземпляр класса
-    #         return redirect(update_post)  # и реверсим на ету форму, передав туда наш сохраненный экземпляр
-    #     return render(request, "blog/post_update_form.html", context={"form": related_form, "tag": post})
+#
+#     def get(self, request, pk):
+#         post = Post.objects.get(pk__iexact=pk) # tag ето наш экземпляр который мы вытянули с БД
+#         related_form = PostForm(instance=post)  # создали новый екземпляр класа Form и в конструктор передали наш обьект c помощью instance
+#         return render(request, "blog/post_update_form.html", context={"form": related_form, "post": post})
+#
+#     def post(self, request, pk):
+#         post = Post.objects.get(pk__iexact=pk) # tag ето наш экземпляр который мы вытянули с БД
+#         related_form = PostForm(request.POST, instance=post)  # создали новый екземпляр класа Form и в конструктор передали наш обьект c помощью instance, берем из реквеста
+#
+#         if related_form.is_valid():
+#             update_post = related_form.save()  # то сохраняем как новый экземпляр класса
+#             return redirect(update_post)  # и реверсим на ету форму, передав туда наш сохраненный экземпляр
+#         return render(request, "blog/post_update_form.html", context={"form": related_form, "tag": post})
 
 class TagDelete(LoginRequiredMixin,MixDelete,View):
 
@@ -285,14 +286,15 @@ class TagDelete(LoginRequiredMixin,MixDelete,View):
     template_name = "blog/tag_del_form.html"
     redirect_url = "tag_list_url"
     raise_exception = True
-    # def get(self, request, pk):
-    #     tag = Tag.objects.get(pk__iexact=pk)
-    #     return render(request, "blog/tag_del_form.html", context={"tag": tag})
-    #
-    # def post(self, request, pk):
-    #     tag = Tag.objects.get(pk__iexact=pk)
-    #     tag.delete()
-    #     return redirect(reverse("post_list_url")) # куда вернет после удаления
+
+    def get(self, request, pk):
+        tag = Tag.objects.get(pk__iexact=pk)
+        return render(request, "blog/tag_del_form.html", context={"tag": tag})
+
+    def post(self, request, pk):
+        tag = Tag.objects.get(pk__iexact=pk)
+        tag.delete()
+        return redirect(reverse("post_list_url")) # куда вернет после удаления
 
 
 """для удаления достаточно указать 3 строки"""
@@ -306,12 +308,12 @@ class PostDeleteView(DeleteView):
 #     template_name = "blog/post_del_form.html"
 #     redirect_url = "post_list_url"
 #     raise_exception = True
-
-    # def get(self, request, pk):
-    #     post = Post.objects.get(pk__iexact=pk)
-    #     return render(request, "blog/post_del_form.html", context={"post": post})
-    #
-    # def post(self, request, pk):
-    #     post = Post.objects.get(pk__iexact=pk)
-    #     post.delete()
-    #     return redirect(reverse("post_list_url")) # куда вернет после удаления
+#
+#     def get(self, request, pk):
+#         post = Post.objects.get(pk__iexact=pk)
+#         return render(request, "blog/post_del_form.html", context={"post": post})
+#
+#     def post(self, request, pk):
+#         post = Post.objects.get(pk__iexact=pk)
+#         post.delete()
+#         return redirect(reverse("post_list_url")) # куда вернет после удаления

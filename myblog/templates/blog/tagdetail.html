@@ -11,8 +11,8 @@
 
         {% if request.user.is_authenticated and request.user.is_staff %}
         <div class="">
-            <a href="{{ admin_n.get_abs_update_url }}" class="btn btn-light" style="color: forestgreen">Редактировать</a>
-            <a href="{{ admin_n.get_abs_del_url }}" class="btn btn-light" style="color: firebrick">Удалить</a>
+            <a href="{{ object.get_abs_update_url }}" class="btn btn-light" style="color: forestgreen">Редактировать</a>
+            <a href="{{ object.get_abs_del_url }}" class="btn btn-light" style="color: firebrick">Удалить</a>
         </div>
         {% endif %}
     {% endblock %}

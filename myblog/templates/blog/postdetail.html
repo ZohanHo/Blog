@@ -4,16 +4,16 @@
 {% block y %}
 
     <div class="card" style="margin-bottom: 20px;">
-        <h5 class="card-header">{{ object.date_pub }}</h5>
+        <h5 class="card-header">{{ post.date_pub }}</h5>
         <div class="card-body">
-            <h5 class="card-title"> {{ object.title }} </h5>
-            <p class="card-text"> {{ object.body }} </p>
+            <h5 class="card-title"> {{ post.title }} </h5>
+            <p class="card-text"> {{ post.body }} </p>
         </div>
 
         {% if request.user.is_authenticated and request.user.is_staff %}
         <div class="card-footer text-muted">
-            <a href="{{ admin_n.get_abs_update_url }}" class="btn btn-light" style="color: forestgreen">Редактировать</a>
-            <a href="{{ admin_n.get_abs_del_url }}" class="btn btn-light" style="color: firebrick">Удалить</a>
+            <a href="{{ object.get_abs_update_url }}" class="btn btn-light" style="color: forestgreen">Редактировать</a>
+            <a href="{{ object.get_abs_del_url }}" class="btn btn-light" style="color: firebrick">Удалить</a>
         </div>
         {% endif %}
 
